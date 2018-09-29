@@ -1,0 +1,7 @@
+bin/bftsmart
+config/currentView
+test
+.idea/
+*.iml
+*.jar
+out/
