@@ -12,4 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-java -Dlogback.configurationFile="./config/logback.xml" -cp bin/*:lib/* $@
+export MESSAGE_BATCH=4
+
+java -Dlogback.configurationFile="./config/logback.xml" -Dmessage_batch=$MESSAGE_BATCH -cp bin/*:lib/* $@
