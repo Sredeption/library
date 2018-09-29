@@ -48,10 +48,18 @@ public class YCSBMessage implements Serializable {
     private int result = -1;
     private HashMap<String, byte[]> results;
     private String errorMsg;
+    private volatile byte padding[];
+    private final static int BATCH_SIZE = 600;
 
     private YCSBMessage() {
         super();
         result = -1;
+    }
+
+    public void fillPadding(int batchSize) {
+        int sizeToFill = batchSize - (int) InstrumentationAgent.getObjectSize(this);
+        if (sizeToFill > 0)
+            padding = new byte[sizeToFill];
     }
 
     public static YCSBMessage newInsertRequest(String table, String key, HashMap<String, byte[]> values) {
@@ -61,6 +69,7 @@ public class YCSBMessage implements Serializable {
         message.table = table;
         message.key = key;
         message.values = values;
+        message.fillPadding(BATCH_SIZE);
         return message;
     }
 
@@ -71,6 +80,7 @@ public class YCSBMessage implements Serializable {
         message.table = table;
         message.key = key;
         message.values = values;
+        message.fillPadding(BATCH_SIZE);
         return message;
     }
 
@@ -82,6 +92,7 @@ public class YCSBMessage implements Serializable {
         message.key = key;
         message.fields = fields;
         message.results = results;
+        message.fillPadding(BATCH_SIZE);
         return message;
     }
 
