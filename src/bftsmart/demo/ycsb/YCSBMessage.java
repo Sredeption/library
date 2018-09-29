@@ -49,7 +49,11 @@ public class YCSBMessage implements Serializable {
     private HashMap<String, byte[]> results;
     private String errorMsg;
     private volatile byte padding[];
-    private final static int BATCH_SIZE = 600;
+    private static int BATCH_SIZE;
+
+    static {
+        BATCH_SIZE = Integer.parseInt(System.getProperty("message_batch"));
+    }
 
     private YCSBMessage() {
         super();

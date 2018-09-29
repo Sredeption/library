@@ -13,4 +13,6 @@
 # limitations under the License.
 
 #/bin/bash
-java -javaagent:./bin/agent.jar -cp ./lib/*:./bin/ com.yahoo.ycsb.Client -threads 10 -P config/workloads/workloada -p measurementtype=timeseries -p timeseries.granularity=1000 -db bftsmart.demo.ycsb.YCSBClient -s > output.txt
+export MESSAGE_BATCH=1000
+
+java -javaagent:./bin/agent.jar -Dmessage_batch=$MESSAGE_BATCH -cp ./lib/*:./bin/ com.yahoo.ycsb.Client -threads 10 -P config/workloads/workloada -p measurementtype=timeseries -p timeseries.granularity=1000 -db bftsmart.demo.ycsb.YCSBClient -s > output.txt
