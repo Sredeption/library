@@ -13,7 +13,8 @@
 # limitations under the License.
 
 #/bin/bash
+export MESSAGE_BATCH=1000
 
 REPLICA_INDEX=$1
 
-java -Dlogback.configurationFile="./config/logback.xml" -cp bin/:lib/* bftsmart.demo.ycsb.YCSBServer $REPLICA_INDEX
+java -javaagent:./bin/agent.jar -Dmessage_batch=$MESSAGE_BATCH -Dlogback.configurationFile="./config/logback.xml" -cp bin/:lib/* bftsmart.demo.ycsb.YCSBServer $REPLICA_INDEX

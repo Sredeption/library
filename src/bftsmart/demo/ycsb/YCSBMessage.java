@@ -52,7 +52,7 @@ public class YCSBMessage implements Serializable {
     private static int BATCH_SIZE;
 
     static {
-        BATCH_SIZE = Integer.parseInt(System.getProperty("message_batch"));
+        BATCH_SIZE = Integer.parseInt(System.getenv("MESSAGE_BATCH"));
     }
 
     private YCSBMessage() {
